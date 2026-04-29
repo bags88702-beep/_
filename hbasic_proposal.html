@@ -16,16 +16,18 @@
     --text: #0A0A0A;
     --sub: #555555;
   }
+  html {
+    overflow-x: visible;
+  }
   body {
     font-family: 'Noto Sans KR', sans-serif;
     background: var(--bg);
     color: var(--text);
     line-height: 1.5;
     letter-spacing: -0.01em;
-    min-width: 1920px;
     width: 1920px;
-    margin: 0 auto;
-    overflow-x: hidden;
+    margin: 0;
+    transform-origin: top left;
   }
   .page { width: 1920px; background: var(--bg); }
   .topbar {
@@ -521,5 +523,15 @@
   </div>
 </div>
 
+<script>
+  function fitToViewport() {
+    var scale = window.innerWidth / 1920;
+    document.body.style.transform = 'scale(' + scale + ')';
+    document.body.style.height = '';
+    document.documentElement.style.height = (document.body.scrollHeight * scale) + 'px';
+  }
+  fitToViewport();
+  window.addEventListener('resize', fitToViewport);
+</script>
 </body>
 </html>
