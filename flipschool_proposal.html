@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920">
+  <title>플립스쿨 숏폼 퍼포먼스 제안서 · 박주원</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
+      color: #0A0A0A;
+      background: #fff;
+      min-width: 1920px;
+    }
+
+    .page {
+      width: 1920px;
+      background: #fff;
+    }
+
+    /* ── SECTION BASE ── */
+    .section {
+      padding: 80px 120px;
+    }
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #FF4D00;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: 34px;
+      font-weight: 900;
+      color: #0A0A0A;
+      margin-bottom: 48px;
+    }
+
+    /* ── COVER ── */
+    .cover {
+      background: #111111;
+      padding: 96px 120px 80px;
+      border-bottom: 4px solid #FF4D00;
+    }
+    .cover-inner {
+      padding-left: 40px;
+      border-left: 4px solid #FF4D00;
+    }
+    .cover-eyebrow {
+      display: inline-block;
+      background: #FF4D00;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      margin-bottom: 36px;
+    }
+    .cover-title {
+      font-size: 76px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.18;
+      margin-bottom: 30px;
+    }
+    .cover-title em {
+      font-style: normal;
+      color: #FF4D00;
+    }
+    .cover-sub {
+      font-size: 20px;
+      font-weight: 400;
+      color: #888;
+    }
+    .cover-sub strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    /* ── TOP BAR (pg 2, 3) ── */
+    .topbar {
+      background: #111111;
+      border-bottom: 4px solid #FF4D00;
+      padding: 26px 120px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .topbar-brand {
+      font-size: 19px;
+      font-weight: 900;
+      color: #fff;
+    }
+    .topbar-author {
+      font-size: 13px;
+      color: #666;
+      margin-top: 3px;
+    }
+    .topbar-chapter {
+      font-size: 17px;
+      font-weight: 700;
+      color: #FF4D00;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── 01 PROBLEMS ── */
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .problem-card {
+      background: #F5F5F5;
+      padding: 44px 40px;
+      border-top: 4px solid #FF4D00;
+    }
+    .problem-num {
+      font-size: 52px;
+      font-weight: 900;
+      color: #FF4D00;
+      opacity: 0.18;
+      line-height: 1;
+      margin-bottom: 18px;
+    }
+    .problem-title {
+      font-size: 21px;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+    .problem-desc {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.75;
+    }
+
+    /* ── 02 TARGETS ── */
+    .targets-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 20px;
+    }
+    .target-card {
+      background: #F5F5F5;
+      padding: 40px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 280px;
+    }
+    .target-icon {
+      width: 50px;
+      height: 50px;
+      background: #FF4D00;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 18px;
+      flex-shrink: 0;
+    }
+    .target-type {
+      font-size: 16px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .target-audience {
+      font-size: 12px;
+      font-weight: 700;
+      color: #FF4D00;
+      margin-bottom: 10px;
+      letter-spacing: 0.04em;
+    }
+    .target-approach {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.65;
+    }
+    .strategy-card {
+      background: #111;
+      padding: 40px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 280px;
+    }
+    .strategy-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #FF4D00;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .strategy-title {
+      font-size: 20px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+    .strategy-desc {
+      font-size: 13px;
+      color: #777;
+      line-height: 1.75;
+    }
+
+    /* ── 03 FLOW ── */
+    .flow-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .flow-card {
+      background: #F5F5F5;
+      padding: 56px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-right: 1px solid #e0e0e0;
+    }
+    .flow-card:last-child { border-right: none; }
+    .flow-card.highlight { background: #FF4D00; border-right: none; }
+
+    .flow-num {
+      font-size: 60px;
+      font-weight: 900;
+      color: #FF4D00;
+      opacity: 0.15;
+      line-height: 1;
+      margin-bottom: 18px;
+    }
+    .flow-card.highlight .flow-num { color: #fff; opacity: 0.25; }
+
+    .flow-badge {
+      display: inline-block;
+      background: rgba(255,77,0,0.1);
+      color: #FF4D00;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 100px;
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
+    }
+    .flow-card.highlight .flow-badge {
+      background: rgba(255,255,255,0.22);
+      color: #fff;
+    }
+    .flow-title {
+      font-size: 26px;
+      font-weight: 900;
+      margin-bottom: 18px;
+      color: #0A0A0A;
+    }
+    .flow-card.highlight .flow-title { color: #fff; }
+    .flow-desc {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.75;
+    }
+    .flow-card.highlight .flow-desc { color: rgba(255,255,255,0.85); }
+
+    /* ── 04 PLANNING ── */
+    .planning-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .planning-card {
+      background: #F5F5F5;
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .planning-type {
+      display: inline-block;
+      background: #111;
+      color: #FF4D00;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 16px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .planning-hook {
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1.4;
+      margin-bottom: 22px;
+    }
+    .planning-divider {
+      width: 36px;
+      height: 3px;
+      background: #FF4D00;
+      margin: 0 auto 22px;
+    }
+    .planning-flow {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.85;
+      margin-bottom: 22px;
+    }
+    .planning-goal {
+      font-size: 13px;
+      font-weight: 700;
+      color: #FF4D00;
+    }
+
+    /* ── DIFF BOX ── */
+    .diff-wrap {
+      padding: 0 120px 80px;
+    }
+    .diff-box {
+      background: #111;
+      padding: 56px 72px;
+      border-left: 5px solid #FF4D00;
+    }
+    .diff-box-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #FF4D00;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .diff-box-title {
+      font-size: 30px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.45;
+      margin-bottom: 32px;
+    }
+    .diff-box-title em {
+      font-style: normal;
+      color: #FF4D00;
+    }
+    .diff-list {
+      display: flex;
+      gap: 64px;
+    }
+    .diff-item {
+      flex: 1;
+    }
+    .diff-item-title {
+      font-size: 16px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .diff-item-desc {
+      font-size: 14px;
+      color: #888;
+      line-height: 1.75;
+    }
+
+    /* ── 05 PORTFOLIO ── */
+    .portfolio-wrap {
+      margin: 0 120px 80px;
+      background: #111;
+      padding: 52px 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .port-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #FF4D00;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .port-title {
+      font-size: 32px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .port-sub {
+      font-size: 15px;
+      color: #777;
+    }
+    .portfolio-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #FF4D00;
+      color: #fff;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 22px 52px;
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      letter-spacing: -0.01em;
+    }
+    .portfolio-link::after {
+      content: "→";
+      font-size: 18px;
+    }
+
+    /* ── 06 CONDITIONS ── */
+    .conditions-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .conditions-table tr {
+      border-bottom: 1px solid #EBEBEB;
+    }
+    .conditions-table td {
+      padding: 26px 36px;
+      font-size: 16px;
+      vertical-align: middle;
+      line-height: 1.5;
+    }
+    .conditions-table td.label-cell {
+      background: #FF4D00;
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      width: 180px;
+      text-align: center;
+      letter-spacing: 0.06em;
+    }
+    .conditions-table td.value-cell {
+      color: #0A0A0A;
+    }
+    .conditions-table td.value-cell strong {
+      color: #FF4D00;
+      font-weight: 900;
+    }
+    .price-big {
+      font-size: 38px;
+      font-weight: 900;
+      color: #FF4D00;
+      vertical-align: middle;
+    }
+    .price-note {
+      font-size: 14px;
+      color: #888;
+      vertical-align: middle;
+      margin-left: 12px;
+    }
+
+    /* ── 07 STEPS ── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .step-card {
+      background: #F5F5F5;
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .step-num {
+      font-size: 12px;
+      font-weight: 700;
+      color: #FF4D00;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .step-title {
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+    .step-desc {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.75;
+    }
+
+    /* ── CTA ── */
+    .cta-box {
+      background: #111;
+      padding: 80px 120px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+    }
+    .cta-title {
+      font-size: 44px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .cta-sub {
+      font-size: 17px;
+      color: #888;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 22px 52px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .cta-btn-kakao {
+      background: #FF4D00;
+      color: #fff;
+    }
+    .cta-btn-email {
+      background: transparent;
+      color: #ccc;
+      border: 2px solid #444;
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      @page { size: landscape; margin: 0; }
+      body { min-width: 1920px; }
+      .page { page-break-after: always; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     PAGE 1
+══════════════════════════════════════ -->
+<div class="page" id="page1">
+
+  <!-- COVER -->
+  <header class="cover">
+    <div class="cover-inner">
+      <div class="cover-eyebrow">Shortform Performance Proposal</div>
+      <h1 class="cover-title">광고비는 나가는데,<br><em>왜 전환이 안 될까요?</em></h1>
+      <p class="cover-sub"><strong>플립스쿨</strong> 메타광고 전환 구조 개선 제안 &nbsp;·&nbsp; 박주원</p>
+    </div>
+  </header>
+
+  <!-- 01 문제 진단 -->
+  <section class="section">
+    <div class="section-label">01 Diagnosis</div>
+    <div class="section-title">현재 광고의 구조적 문제</div>
+    <div class="problems-grid">
+
+      <div class="problem-card">
+        <div class="problem-num">01</div>
+        <div class="problem-title">정보 전달 중심 광고</div>
+        <div class="problem-desc">제품 기능·설명에 집중한 나머지 부모가 실제로 느끼는 공감·불안·기대감을 자극하지 못합니다. 감정 연결 없이는 전환 저항이 발생합니다.</div>
+      </div>
+
+      <div class="problem-card">
+        <div class="problem-num">02</div>
+        <div class="problem-title">단일 메시지 접근</div>
+        <div class="problem-desc">타깃별 페인포인트가 완전히 다른데 하나의 광고 메시지로 모든 부모를 공략하려 해 공감 효율이 낮아지고 있습니다.</div>
+      </div>
+
+      <div class="problem-card">
+        <div class="problem-num">03</div>
+        <div class="problem-title">광고처럼 보이는 연출</div>
+        <div class="problem-desc">브랜드 홍보 중심 연출이 교육 브랜드 특성과 맞지 않아 신뢰도를 떨어뜨리고, 시청자가 첫 3초 안에 스킵하게 만듭니다.</div>
+      </div>
+
+      <div class="problem-card">
+        <div class="problem-num">04</div>
+        <div class="problem-title">신뢰 없는 즉시 전환 시도</div>
+        <div class="problem-desc">교육 브랜드는 즉시 구매보다 신뢰 축적 후 전환 구조가 필수입니다. 단발성 광고는 누적 효과를 만들지 못합니다.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 타깃 -->
+  <section class="section" style="padding-top: 0;">
+    <div class="section-label">02 Target</div>
+    <div class="section-title">핵심 전환 타깃</div>
+    <div class="targets-grid">
+
+      <div class="target-card">
+        <div class="target-icon">1</div>
+        <div class="target-type">공부 거부 아이 부모</div>
+        <div class="target-audience">30대 초반 부모</div>
+        <div class="target-approach">학습 스트레스 없이 공부 습관을 만들고 싶은 타깃 → 리얼 반응형 브이로그</div>
+      </div>
+
+      <div class="target-card">
+        <div class="target-icon">2</div>
+        <div class="target-type">사고력 고민 학부모</div>
+        <div class="target-audience">30~40대 학부모</div>
+        <div class="target-approach">사고력·창의력 저하를 걱정하는 타깃 → 공감 스토리형 콘텐츠</div>
+      </div>
+
+      <div class="target-card">
+        <div class="target-icon">3</div>
+        <div class="target-type">학원 관리 피로 워킹맘</div>
+        <div class="target-audience">맞벌이·워킹맘</div>
+        <div class="target-approach">관리 피로 없이 집에서 해결하고 싶은 타깃 → 현실 육아 공감형</div>
+      </div>
+
+      <div class="target-card">
+        <div class="target-icon">4</div>
+        <div class="target-type">암기 교육 거부 프리미엄층</div>
+        <div class="target-audience">프리미엄 육아층</div>
+        <div class="target-approach">자기주도 경험을 중요하게 생각하는 타깃 → 브랜드 신뢰형</div>
+      </div>
+
+      <div class="target-card">
+        <div class="target-icon">5</div>
+        <div class="target-type">집중력 부족 유아 부모</div>
+        <div class="target-audience">유아 자녀 부모</div>
+        <div class="target-approach">스마트폰 대신 교구로 몰입을 원하는 타깃 → Before/After 반응형</div>
+      </div>
+
+      <div class="strategy-card">
+        <div class="strategy-label">Core Strategy</div>
+        <div class="strategy-title">타깃마다<br>다른 메시지,<br>다른 구조</div>
+        <div class="strategy-desc">하나의 광고로 모두를 공략하지 않습니다. 각 타깃의 불안 포인트에 맞춘 시리즈형 숏폼으로 전환 효율을 최대화합니다.</div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+<!-- /PAGE 1 -->
+
+
+<!-- ══════════════════════════════════════
+     PAGE 2
+══════════════════════════════════════ -->
+<div class="page" id="page2">
+
+  <div class="topbar">
+    <div>
+      <div class="topbar-brand">플립스쿨</div>
+      <div class="topbar-author">숏폼 퍼포먼스 제안 · 박주원</div>
+    </div>
+    <div class="topbar-chapter">02 전략 &amp; 기획</div>
+  </div>
+
+  <!-- 03 플로우 -->
+  <section class="section">
+    <div class="section-label">03 Content Flow</div>
+    <div class="section-title">전환 콘텐츠 구조 플로우</div>
+    <div class="flow-grid">
+
+      <div class="flow-card">
+        <div class="flow-num">01</div>
+        <div class="flow-badge">후기형</div>
+        <div class="flow-title">부모 공감</div>
+        <div class="flow-desc">실제 부모 시점으로 구성해 "우리 집 이야기"처럼 느껴지도록 연출. 신뢰와 현실감을 동시에 전달합니다.</div>
+      </div>
+
+      <div class="flow-card">
+        <div class="flow-num">02</div>
+        <div class="flow-badge">스토리형</div>
+        <div class="flow-title">감정선 강화</div>
+        <div class="flow-desc">아이가 미션을 해결해가는 과정을 담아 몰입감을 높이고, 부모의 기대감과 감정선을 깊이 자극합니다.</div>
+      </div>
+
+      <div class="flow-card">
+        <div class="flow-num">03</div>
+        <div class="flow-badge">리얼형</div>
+        <div class="flow-title">광고 티 제거</div>
+        <div class="flow-desc">아이의 실제 반응, 웃음, 실수, 집중 순간을 그대로 담아 광고가 아닌 자연스러운 일상 콘텐츠로 인식시킵니다.</div>
+      </div>
+
+      <div class="flow-card highlight">
+        <div class="flow-num">04</div>
+        <div class="flow-badge">세일즈형</div>
+        <div class="flow-title">USP 전달</div>
+        <div class="flow-desc">플립스쿨만의 차별점을 짧고 명확하게 정리. 신뢰가 쌓인 이후 직접 전환을 유도하는 마지막 단계입니다.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 콘텐츠 기획 예시 -->
+  <section class="section" style="padding-top: 0;">
+    <div class="section-label">04 Content Plan</div>
+    <div class="section-title">콘텐츠 기획 예시 3종</div>
+    <div class="planning-grid">
+
+      <div class="planning-card">
+        <div class="planning-type">후기형</div>
+        <div class="planning-hook">"우리 애가 처음으로<br>먼저 하겠다고 했어요"</div>
+        <div class="planning-divider"></div>
+        <div class="planning-flow">
+          부모 공감 Hook<br>
+          → 아이 변화 경험 서술<br>
+          → 플립스쿨 계기 자연 연결<br>
+          → 신뢰 기반 전환 유도
+        </div>
+        <div class="planning-goal">목표: 신뢰 + 현실감 극대화</div>
+      </div>
+
+      <div class="planning-card">
+        <div class="planning-type">리얼형</div>
+        <div class="planning-hook">"공부 싫어하던 아이<br>반응 변화 공개"</div>
+        <div class="planning-divider"></div>
+        <div class="planning-flow">
+          아이 반응 장면 오프닝<br>
+          → 집중하는 순간 포착<br>
+          → 감정 공감 자막 + 부모 리액션<br>
+          → 광고 티 없이 자연 마무리
+        </div>
+        <div class="planning-goal">목표: 광고 티 최소화 · 자연 확산</div>
+      </div>
+
+      <div class="planning-card">
+        <div class="planning-type">비교형</div>
+        <div class="planning-hook">"학원 대신 집에서<br>몰입하는 이유"</div>
+        <div class="planning-divider"></div>
+        <div class="planning-flow">
+          문제 제기 Hook (학원 피로)<br>
+          → 기존 교육 방식 한계 언급<br>
+          → 플립스쿨 차이 명확히 비교<br>
+          → USP 전달 + CTA
+        </div>
+        <div class="planning-goal">목표: 차별점 각인 · 직접 전환</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 차별점 다크박스 -->
+  <div class="diff-wrap">
+    <div class="diff-box">
+      <div class="diff-box-label">Differentiation</div>
+      <div class="diff-box-title">왜 <em>플립스쿨</em>은 기존 광고 방식으로는<br>전환이 어려울까요?</div>
+      <div class="diff-list">
+        <div class="diff-item">
+          <div class="diff-item-title">감정 공감이 우선</div>
+          <div class="diff-item-desc">교육 브랜드는 "좋은 제품" 설명보다 "우리 아이 이야기"처럼 느껴져야 반응합니다. 정보보다 감정이 먼저입니다.</div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-item-title">신뢰 축적 구조 필요</div>
+          <div class="diff-item-desc">즉시 구매가 아닌 3~5편 누적 시청 후 전환하는 패턴이 교육 카테고리의 특성입니다. 시리즈형이 유리합니다.</div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-item-title">타깃별 메시지 분리</div>
+          <div class="diff-item-desc">"공부 싫어해요"에 반응하는 부모와 "사고력이 걱정돼요"에 반응하는 부모는 접근 방식 자체가 달라야 합니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- /PAGE 2 -->
+
+
+<!-- ══════════════════════════════════════
+     PAGE 3
+══════════════════════════════════════ -->
+<div class="page" id="page3">
+
+  <div class="topbar">
+    <div>
+      <div class="topbar-brand">플립스쿨</div>
+      <div class="topbar-author">숏폼 퍼포먼스 제안 · 박주원</div>
+    </div>
+    <div class="topbar-chapter">03 조건 &amp; 연락</div>
+  </div>
+
+  <!-- 05 포트폴리오 -->
+  <section class="section" style="padding-bottom: 40px;">
+    <div class="section-label">05 Portfolio</div>
+    <div class="section-title">제작 영상 포트폴리오</div>
+  </section>
+  <div class="portfolio-wrap">
+    <div>
+      <div class="port-label">Google Slides</div>
+      <div class="port-title">제작 영상 포트폴리오</div>
+      <div class="port-sub">실제 납품된 숏폼 영상을 직접 확인해보세요.</div>
+    </div>
+    <a class="portfolio-link"
+       href="https://docs.google.com/presentation/d/1NY-uyVcMLHIORo0mmz6LMupt4u3PCQhtj82nUCLGiFU/edit?usp=sharing"
+       target="_blank">포트폴리오 보기</a>
+  </div>
+
+  <!-- 06 작업 조건 -->
+  <section class="section" style="padding-top: 80px; padding-bottom: 80px;">
+    <div class="section-label">06 Conditions</div>
+    <div class="section-title">작업 조건</div>
+    <table class="conditions-table">
+      <tr>
+        <td class="label-cell">제작 단가</td>
+        <td class="value-cell">
+          <span class="price-big">단건 20만원</span>
+          <span class="price-note">퀄리티·분량에 따라 조정 가능</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label-cell">작업 범위</td>
+        <td class="value-cell">기획 → 촬영 → 편집 → 납품 전 과정 <strong>직접 진행</strong></td>
+      </tr>
+      <tr>
+        <td class="label-cell">촬영 비용</td>
+        <td class="value-cell">별도 협의 &nbsp;·&nbsp; 편집만 진행 시 단가 조정 가능</td>
+      </tr>
+      <tr>
+        <td class="label-cell">납기</td>
+        <td class="value-cell">평균 <strong>3일 이내</strong></td>
+      </tr>
+      <tr>
+        <td class="label-cell">수정 대응</td>
+        <td class="value-cell">빠른 피드백 반영 — 횟수 제한 없이 소통</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- 07 진행 방식 -->
+  <section class="section" style="padding-top: 0; padding-bottom: 80px;">
+    <div class="section-label">07 Process</div>
+    <div class="section-title">진행 방식</div>
+    <div class="steps-grid">
+
+      <div class="step-card">
+        <div class="step-num">Step 01</div>
+        <div class="step-title">테스트 1편 제작</div>
+        <div class="step-desc">부담 없이 결과물을 먼저 확인해보세요. 첫 영상은 테스트 단가로 가볍게 시작하실 수 있습니다.</div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">Step 02</div>
+        <div class="step-title">성과 분석 공유</div>
+        <div class="step-desc">CTR · 조회수 · 저장률 리포트를 함께 분석해 다음 콘텐츠 방향을 데이터 기반으로 설계합니다.</div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">Step 03</div>
+        <div class="step-title">장기 구조 설계</div>
+        <div class="step-desc">타깃별 콘텐츠 시리즈 운영으로 브랜드 신뢰 누적과 지속적인 전환 효율을 함께 만들어갑니다.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <div>
+      <div class="cta-title">테스트 1편,<br>부담 없이 시작해보세요.</div>
+      <div class="cta-sub">성과 확인 후 장기 운영 구조까지 함께 설계해드립니다.</div>
+    </div>
+    <div class="cta-buttons">
+      <a class="cta-btn cta-btn-kakao"
+         href="https://open.kakao.com/o/sFB4s6mi"
+         target="_blank">카카오 오픈채팅 문의</a>
+      <a class="cta-btn cta-btn-email"
+         href="mailto:bags88702@gmail.com">bags88702@gmail.com</a>
+    </div>
+  </div>
+
+</div>
+<!-- /PAGE 3 -->
+
+</body>
+</html>
