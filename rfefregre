@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta Lead Finder</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #ffffff;
+    --surface1:  #f7f7f5;
+    --surface2:  #f1f1ef;
+    --surface3:  #e9e9e7;
+    --border:    rgba(55,53,47,0.09);
+    --text1:     #37352f;
+    --text2:     #787672;
+    --text3:     #afadaa;
+    --accent:    #2383e2;
+    --accent-bg: #e8f0fb;
+    --green:     #0f7b6c;
+    --green-bg:  #dcf5f0;
+    --yellow:    #9f6b00;
+    --yellow-bg: #fbf3db;
+    --radius:    6px;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text1);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+  }
+
+  /* sidebar */
+  .sidebar {
+    width: 240px;
+    min-width: 240px;
+    background: var(--surface1);
+    border-right: 1px solid var(--border);
+    padding: 12px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-height: 100vh;
+  }
+
+  .sidebar-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text1);
+    padding: 6px 10px 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sidebar-section {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text3);
+    padding: 10px 10px 3px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    color: var(--text2);
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .sidebar-item:hover { background: var(--surface3); color: var(--text1); }
+  .sidebar-item.active { background: var(--surface3); color: var(--text1); font-weight: 500; }
+
+  /* main */
+  .main {
+    flex: 1;
+    padding: 48px 80px 80px;
+  }
+
+  .page-icon { font-size: 38px; margin-bottom: 10px; }
+
+  .page-title {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--text1);
+    margin-bottom: 4px;
+  }
+
+  .page-desc {
+    font-size: 14px;
+    color: var(--text3);
+    margin-bottom: 36px;
+  }
+
+  .divider { height: 1px; background: var(--border); margin: 28px 0; }
+
+  .block-heading {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text1);
+    margin-bottom: 14px;
+  }
+
+  /* callout */
+  .callout {
+    background: var(--surface1);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    display: flex;
+    gap: 10px;
+    font-size: 13.5px;
+    color: var(--text2);
+    margin-bottom: 16px;
+  }
+
+  /* buttons */
+  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 13px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: background 0.12s;
+    font-family: inherit;
+  }
+
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #1a72cf; }
+  .btn-default { background: var(--surface2); color: var(--text1); }
+  .btn-default:hover { background: var(--surface3); }
+  .btn:disabled { background: var(--surface2); color: var(--text3); cursor: not-allowed; }
+
+  /* progress */
+  .progress-block {
+    background: var(--surface1);
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+
+  .progress-track {
+    width: 100%;
+    height: 6px;
+    background: var(--surface3);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+
+  .progress-fill {
+    width: 35%;
+    height: 100%;
+    background: var(--accent);
+    border-radius: 99px;
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12.5px;
+    color: var(--text2);
+  }
+
+  .progress-pct { font-weight: 600; color: var(--accent); }
+
+  /* table */
+  .table-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--text2);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    width: 14px; height: 14px;
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+
+  .table-wrap {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  table { width: 100%; border-collapse: collapse; }
+
+  thead th {
+    background: var(--surface1);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--text3);
+    padding: 8px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: 0.03em;
+  }
+
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--surface1); }
+
+  tbody td {
+    padding: 10px 14px;
+    font-size: 13.5px;
+    color: var(--text1);
+    vertical-align: middle;
+  }
+
+  td[contenteditable] { color: var(--text3); outline: none; }
+  td[contenteditable]:focus { background: var(--accent-bg); color: var(--text1); }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11.5px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .badge-warn { background: var(--yellow-bg); color: var(--yellow); }
+  .badge-ok   { background: var(--green-bg);  color: var(--green); }
+
+  /* log */
+  .log {
+    background: var(--surface1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    height: 180px;
+    overflow-y: auto;
+    font-family: 'SF Mono', 'Fira Mono', ui-monospace, monospace;
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--text2);
+    white-space: pre-wrap;
+  }
+  .log::-webkit-scrollbar { width: 4px; }
+  .log::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 4px; }
+  .log-time { color: var(--text3); }
+
+  /* result */
+  .prop-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    border-bottom: 1px solid var(--border);
+    min-height: 34px;
+  }
+  .prop-row:last-child { border-bottom: none; }
+
+  .prop-key {
+    font-size: 12.5px;
+    color: var(--text3);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    padding: 6px 8px 6px 0;
+  }
+
+  .prop-val {
+    font-size: 13px;
+    color: var(--text1);
+    display: flex;
+    align-items: center;
+    padding: 6px 0;
+  }
+
+  .prop-val a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 12.5px;
+    word-break: break-all;
+  }
+  .prop-val a:hover { text-decoration: underline; }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--green-bg);
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 2px 9px;
+    border-radius: 4px;
+  }
+
+  .dot-green {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+</style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-title">🔍 Meta Lead Finder</div>
+
+    <div class="sidebar-section">메뉴</div>
+    <div class="sidebar-item active">🏠 홈</div>
+    <div class="sidebar-item">▶ 실행 현황</div>
+    <div class="sidebar-item">📋 CSV 결과</div>
+    <div class="sidebar-item">📄 실행 로그</div>
+
+    <div class="sidebar-section">설정</div>
+    <div class="sidebar-item">⚙️ 환경설정</div>
+    <div class="sidebar-item">🔑 API 키</div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+
+    <div class="page-icon">🔍</div>
+    <div class="page-title">Meta Lead Finder</div>
+    <div class="page-desc">Meta 광고 기반 리드 수집 및 분석 파이프라인</div>
+
+    <!-- Run -->
+    <div class="block-heading">▶ 실행</div>
+    <div class="callout">
+      <span>💡</span>
+      <span>main.py를 먼저 실행한 후 pipeline.py를 실행하세요. 순서를 바꾸면 오류가 발생할 수 있습니다.</span>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary">▶ main.py 실행</button>
+      <button class="btn btn-default" disabled>▶ pipeline.py 실행</button>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Progress -->
+    <div class="block-heading">⏳ 진행 상황</div>
+    <div class="progress-block">
+      <div class="progress-track"><div class="progress-fill"></div></div>
+      <div class="progress-meta">
+        <span>브랜드 홈페이지 분석 중...</span>
+        <span class="progress-pct">35%</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Table -->
+    <div class="block-heading">📋 CSV 결과</div>
+    <div class="table-toolbar">
+      <label class="checkbox-label">
+        <input type="checkbox"> None 포함 행만 보기
+      </label>
+      <div class="btn-row">
+        <button class="btn btn-default">💾 저장</button>
+        <button class="btn btn-default">⬇ 다운로드</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>브랜드</th><th>이메일</th><th>대표자</th><th>전화번호</th><th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ABC</td>
+            <td>info@abc.com</td>
+            <td contenteditable spellcheck="false">None</td>
+            <td contenteditable spellcheck="false">None</td>
+            <td><span class="badge badge-warn">⚠ 미완</span></td>
+          </tr>
+          <tr>
+            <td>XYZ</td>
+            <td contenteditable spellcheck="false">None</td>
+            <td>홍길동</td>
+            <td contenteditable spellcheck="false">None</td>
+            <td><span class="badge badge-warn">⚠ 미완</span></td>
+          </tr>
+          <tr>
+            <td>DEF</td>
+            <td>hello@test.com</td>
+            <td>김철수</td>
+            <td>010-1234-5678</td>
+            <td><span class="badge badge-ok">✓ 완료</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Log -->
+    <div class="block-heading">📄 실행 로그</div>
+    <div class="log"><span class="log-time">[13:01]</span>  Meta 광고 검색...
+<span class="log-time">[13:02]</span>  홈페이지 크롤링...
+<span class="log-time">[13:03]</span>  GPT 분석...
+<span class="log-time">[13:04]</span>  리드 데이터 저장 중...</div>
+
+    <div class="divider"></div>
+
+    <!-- Result -->
+    <div class="block-heading">✅ 결과</div>
+    <div class="prop-row">
+      <span class="prop-key">상태</span>
+      <span class="prop-val"><span class="status-pill"><span class="dot-green"></span> 성공</span></span>
+    </div>
+    <div class="prop-row">
+      <span class="prop-key">Google Docs</span>
+      <span class="prop-val"><a href="#">https://docs.google.com/...</a></span>
+    </div>
+    <div class="prop-row">
+      <span class="prop-key">Gmail Draft</span>
+      <span class="prop-val"><a href="#">https://mail.google.com/...</a></span>
+    </div>
+
+  </main>
+
+</body>
+</html>
+
