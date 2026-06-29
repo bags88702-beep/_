@@ -26,15 +26,13 @@
     --radius:    6px;
   }
 
-  body {
-    font-family: 'Inter', -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text1);
-    font-size: 14px;
-    line-height: 1.6;
-    min-height: 100vh;
-    display: flex;
-  }
+  body{
+    font-family:'Inter',-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--text1);
+    font-size:14px;
+    line-height:1.6;
+}
 
   /* sidebar */
   .sidebar {
@@ -82,11 +80,11 @@
   .sidebar-item:hover { background: var(--surface3); color: var(--text1); }
   .sidebar-item.active { background: var(--surface3); color: var(--text1); font-weight: 500; }
 
-  /* main */
-  .main {
-    flex: 1;
-    padding: 48px 80px 80px;
-  }
+  .main{
+    max-width:1400px;
+    margin:auto;
+    padding:56px 40px 80px;
+}
 
   .page-icon { font-size: 50px; margin-bottom: 10px; }
 
@@ -135,10 +133,10 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 13px;
-    border-radius: var(--radius);
-    font-size: 13px;
-    font-weight: 500;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
     border: none;
     transition: background 0.12s;
@@ -260,7 +258,7 @@
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 14px 16px;
-    height: 180px;
+    height: 300px;
     overflow-y: auto;
     font-family: 'SF Mono', 'Fira Mono', ui-monospace, monospace;
     font-size: 12px;
@@ -327,21 +325,6 @@
 </head>
 <body>
 
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="sidebar-title">🔍 Meta Lead Finder</div>
-
-    <div class="sidebar-section">메뉴</div>
-    <div class="sidebar-item active">🏠 홈</div>
-    <div class="sidebar-item">▶ 실행 현황</div>
-    <div class="sidebar-item">📋 CSV 결과</div>
-    <div class="sidebar-item">📄 실행 로그</div>
-
-    <div class="sidebar-section">설정</div>
-    <div class="sidebar-item">⚙️ 환경설정</div>
-    <div class="sidebar-item">🔑 API 키</div>
-  </aside>
-
   <!-- Main -->
   <main class="main">
 
@@ -363,10 +346,17 @@
     <div class="progress-block">
       <div class="progress-track"><div class="progress-fill"></div></div>
       <div class="progress-meta">
-        <span>브랜드 홈페이지 분석 중...</span>
-        <span class="progress-pct">35%</span>
-      </div>
+    <div>
+        <div>브랜드 홈페이지 분석 중...</div>
+        <div style="margin-top:4px;color:var(--text3);">
+            처리 14 / 37
+        </div>
     </div>
+
+    <span class="progress-pct">
+        35%
+    </span>
+      </div>
 
     <div class="divider"></div>
 
